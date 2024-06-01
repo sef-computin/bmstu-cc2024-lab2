@@ -112,3 +112,34 @@ func Test3(t *testing.T) {
 	fmt.Println("Грамматика после удаления рекурсии")
 	fmt.Println(recursionlessGrammar.ToString())
 }
+
+func Test4(t *testing.T) {
+	input := []string{}
+
+	input = append(input, "4")
+	input = append(input, "A B C D")
+	input = append(input, "3")
+	input = append(input, "a b c")
+	input = append(input, "6")
+	input = append(input, "A -> B")
+	input = append(input, "A -> a")
+	input = append(input, "B -> C")
+	input = append(input, "B -> b")
+	input = append(input, "C -> D D")
+	input = append(input, "C -> c")
+	input = append(input, "A")
+
+	g := grammar.ReadGrammar(input)
+
+	// t.Fail()
+	if g.G == nil {
+		t.Fail()
+	}
+
+	fmt.Println(g.ToString())
+
+	chainlessGrammar := g.Eliminate_Chain_Rules()
+	fmt.Println("Грамматика после удаления цепных правил")
+	fmt.Println(chainlessGrammar.ToString())
+
+}
